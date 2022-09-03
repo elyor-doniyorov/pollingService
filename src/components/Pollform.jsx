@@ -5,6 +5,7 @@ function PollForm() {
   const [questions, setQuestions] = useState({question: ""});
   const [validation, setValidation] = useState({question: ""});
 
+
   function handleChange(event) {
     const { name, value } = event.target;
     setQuestions({ ...questions, [name]: value });
@@ -24,6 +25,7 @@ function PollForm() {
 
   useEffect(() => {
     checkValidation();
+    // eslint-disable-next-line
   }, [questions]);
 
   const handleSubmit = event => {
@@ -38,14 +40,16 @@ function PollForm() {
           className="p-2 w-full" 
           type="text" 
           name="question"
-          placeholder="Type your question here" 
           onChange={(event) => handleChange(event)}
+          placeholder="Type your question here" 
           value={questions.question} 
         />
         {validation.question && <p>{validation.question}</p>}
         {validation.question && console.log(validation)}
         <AnswerOptions />
+        
         <button type="submit" className='mt-10 p-2 text-white w-full bg-cyan-600'>Create poll</button>
+
       </form>
     </div>
   );
