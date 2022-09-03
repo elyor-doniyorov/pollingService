@@ -1,10 +1,13 @@
 import React from "react";
+import PollForm from "./components/Pollform";
+import AnswerOptions from "./components/AnswerOptions";
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className="w-96 mx-auto mt-10">
+      <PollForm />
+      <AnswerOptions />
+    </div>
   );
 }
 
