@@ -7,20 +7,16 @@ function AnswerOptions() {
     
     <div className='mt-5 flex justify-start items-center flex-col'>
       <div className='flex justify-start mt-4 items-center'>
-        <input className='mr-4' type="radio" name="radio" checked />
-        <p>answer</p>
+        <input className='mr-4 p-2 w-64 text-center' type="text" name="answer" placeholder='Type your answer here' />
       </div>
       <div className='flex justify-start mt-4 items-center'>
-        <input className='mr-4' type="radio" name="radio" checked />
-        <p>answer</p>
+        <input className='mr-4 p-2 w-64 text-center' type="text" name="answer" placeholder='Type your answer here' />
       </div>
     </div>
 
       <a href='##' className='flex justify-end'>
         <AiOutlinePlus />
       </a>
-
-      <button className='mt-10 w-full bg-cyan-600'>Create poll</button>
     </>
 
   );
