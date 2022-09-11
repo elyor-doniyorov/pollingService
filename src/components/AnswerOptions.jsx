@@ -1,69 +1,57 @@
-import React, {useState, useEffect} from "react";
-import { AiOutlinePlus } from 'react-icons/ai';
+import React from "react";
+import { useState } from "react";
+// import { AiOutlinePlus } from 'react-icons/ai';
 
 function AnswerOptions() {
-  const [answers, setAnswers] = useState({answer: ""});
-  const [validation, setValidation] = useState({answer: ""});
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setAnswers({ ...answers, [name]: value });
+  const [serviceList, setServiceList] = useState([
+    {service: ''}
+  ]);
+
+  const handleServiceAdd = () => {
+    setServiceList([...serviceList, {service: ''}])
   }
 
-  const checkValidation = () => {
-    let errors = JSON.parse(JSON.stringify(validation));
-
-    //answer validation
-    if (!answers.answer.trim()) {
-      errors.answer = 'Answer is required';
-    } else {
-      errors.answer = '';
-    }
-    setValidation(errors);
-  }
-
-  useEffect(() => {
-    checkValidation();
-    // eslint-disable-next-line
-  }, [answers]);
-
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleServiceRemove = (index) => {
+    const list = [...serviceList];
+    list.splice(index, 1);
+    setServiceList(list);
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className='mt-5 flex justify-start items-center flex-col'>
-          <div className='flex justify-start mt-4 items-center'>
-            <input 
-              className='mr-4 p-2 w-64 text-center' 
-              type="text" 
-              name="answer"
-              placeholder='Type your answer here' 
-              onChange={(event) => handleChange(event)}
-              />
+    <form className='App' autoComplete='off'>
+      <div className='form-field'>
+        <label htmlFor='service'>Service(s)</label>
+        {serviceList.map((singleService, index) => (
+          <div key={index} className='services'>
+            <div className='first-division'>
+              <input name='service' type="text" id='service' required />
+              {serviceList.length - 1 === index && serviceList.length < 4 && 
+               (
+                 <button 
+                  type='button' 
+                  className='add-btn'
+                  onClick={handleServiceAdd}
+                 >
+                  <span>Add a Service</span>
+                </button>
+                )}
+            </div>
+            <div className='second-division'>
+              {serviceList.length > 1 && (
+                <button 
+                  type='button' 
+                  className='remove-btn'
+                  onClick={() => handleServiceRemove(index)}
+                  >
+                  <span>Remove</span>
+                </button>
+              )}
+            </div>
           </div>
-              {validation.answer && <p>{validation.answer}</p>}
-              {validation.answer && console.log(validation)}
-          <div className='flex justify-start mt-4 items-center'>
-            <input 
-              className='mr-4 p-2 w-64 text-center' 
-              type="text" 
-              name="answer" 
-              placeholder='Type your answer here' 
-              onChange={(event) => handleChange(event)}
-              />
-          </div>
-              {validation.answer && <p>{validation.answer}</p>}
-              {validation.answer && console.log(validation)}
-        </div>
-
-        <a href='##' className='flex justify-end'>
-          <AiOutlinePlus />
-        </a>
-      </form>
-    </div>
+        ))}
+      </div>
+    </form>
 
   );
 }
